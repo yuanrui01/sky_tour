@@ -24,13 +24,13 @@ public class Test01 {
 	}
 	public int lengthOfLIS(int[] nums) {
 		List<Integer> ilist = new ArrayList<>();
-		for (int i = 0; i < nums.length; i++) {
-			int index = lowerBound(ilist, nums[i]);
-			if (index == ilist.size())
-				ilist.add(nums[i]);
-			else
-				ilist.set(index, nums[i]);
-		}
+        for (int num : nums) {
+            int index = lowerBound(ilist, num);
+            if (index == ilist.size())
+                ilist.add(num);
+            else
+                ilist.set(index, num);
+        }
 		return ilist.size();
 	}
 
