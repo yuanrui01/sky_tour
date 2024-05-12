@@ -34,23 +34,20 @@ public class MaximizeSweetness {
 		int cnt = 0;
 		int s = 0;
 		for (int x : nums) {
-			if (x >= mx) {
-				cnt++;
-				s = 0;
-			} else if (s + x <= mx) {
+			if (s + x < mx) {
 				s += x;
 			} else {
-				cnt += 1;
-				s = x;
+				cnt++;
+				s = 0;
 			}
 		}
-		return cnt > k;
+		return cnt >= k;
 	}
 
 	public static void main(String[] args) {
 		MaximizeSweetness maximizeSweetness = new MaximizeSweetness();
-		int[] sweetness = {90670,55382,95298,95795,73204,41464,18675,30104,47442,55307};
-		int k = 6;
+		int[] sweetness = {1,2,3,4,5,6,7,8,9};
+		int k = 5;
 		System.out.println(maximizeSweetness.maximizeSweetness(sweetness, k));
 	}
 }
