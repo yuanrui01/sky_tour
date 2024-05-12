@@ -11,10 +11,13 @@ public class SmallestDivisor {
     private int[] nums;
 
     public int smallestDivisor(int[] nums, int threshold) {
-        Arrays.sort(nums);
         this.nums = nums;
         int left = 1;
-        int right = nums[nums.length - 1];
+        int right = 0;
+        for (int num : nums) {
+            right = Math.max(num, right);
+        }
+
 
         while ( left <= right ) {
             int mid = left + (right - left) / 2;
