@@ -14,7 +14,7 @@ public class SplitArray {
 			mx = Math.max(mx, x);
 		}
 
-		int left = Math.max(mx, (sum) / k);
+		int left = Math.max(mx, sum / k);
 		int right = sum;
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
