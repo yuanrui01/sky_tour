@@ -16,7 +16,7 @@ public class MinimumEffortPath {
 			Arrays.fill(row, Integer.MAX_VALUE);
 		}
 		dist[0][0] = 0;
-		int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, - 1}};
+		int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 		PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(pair -> pair[0]));
 		pq.offer(new int[]{0, 0, 0});
 
@@ -33,7 +33,7 @@ public class MinimumEffortPath {
 			for (int[] direction : directions) {
 				int newI = i + direction[0];
 				int newJ = j + direction[1];
-				if (newI >= 0 && newI < m && newJ >=0 && newJ < n) {
+				if (newI >= 0 && newI < m && newJ >= 0 && newJ < n) {
 					int newDist = Math.max(Math.abs(heights[newI][newJ] - heights[i][j]), dist[i][j]);
 					if (newDist < dist[newI][newJ]) {
 						dist[newI][newJ] = newDist;
