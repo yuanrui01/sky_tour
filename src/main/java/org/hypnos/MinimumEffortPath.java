@@ -1,61 +1,54 @@
 package org.hypnos;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * 1631. 最小体力消耗路径
+ * 1631. 最小体力消耗路径 - dijkstra's algorithm
  */
 public class MinimumEffortPath {
 	public int minimumEffortPath(int[][] heights) {
 		int m = heights.length;
 		int n = heights[0].length;
-		int[][] dis = new int[m][n];
-		for (int[] row : dis) {
+		int[][] dist = new int[m][n];
+		for (int[] row : dist) {
 			Arrays.fill(row, Integer.MAX_VALUE);
 		}
-		dis[0][0] = 0; // 初始化start
-
-		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-		pq.offer(new int[]{0, 0, 0}); // {dis, i, j}
-
-		int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}}; // 右，左，下，上
+		dist[0][0] = 0;
+		int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, - 1}};
+		PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(pair -> pair[0]));
+		pq.offer(new int[]{0, 0, 0});
 
 		while (!pq.isEmpty()) {
-			int[] curr = pq.poll();
-			int d = curr[0];
-			int i = curr[1];
-			int j = curr[2];
+			int[] poll = pq.poll();
+			int d = poll[0];
+			int i = poll[1];
+			int j = poll[2];
 
-			if (i == m - 1 && j == n - 1) {
+			if (i == m - 1 && j == n - 1)
 				return d;
-			}
-
-			if (d > dis[i][j]) {
+			if (d > dist[i][j])
 				continue;
-			}
-
-			for (int[] dir : directions) {
-				int newI = i + dir[0];
-				int newJ = j + dir[1];
-
-				if (newI >= 0 && newI < m && newJ >= 0 && newJ < n) {
-					int nd = Math.max(Math.abs(heights[newI][newJ] - heights[i][j]), dis[i][j]);
-					if (nd < dis[newI][newJ]) {
-						dis[newI][newJ] = nd;
-						pq.offer(new int[]{nd, newI, newJ});
+			for (int[] direction : directions) {
+				int newI = i + direction[0];
+				int newJ = j + direction[1];
+				if (newI >= 0 && newI < m && newJ >=0 && newJ < n) {
+					int newDist = Math.max(Math.abs(heights[newI][newJ] - heights[i][j]), dist[i][j]);
+					if (newDist < dist[newI][newJ]) {
+						dist[newI][newJ] = newDist;
+						pq.offer(new int[]{newDist, newI, newJ});
 					}
 				}
 			}
-		}
 
-		// 如果无法到达终点，返回-1（或任何合适的错误代码）
+		}
 		return -1;
 	}
 
 	public static void main(String[] args) {
 		MinimumEffortPath minimumEffortPath = new MinimumEffortPath();
-		int[][] heights = {{1,2,1,1,1},{1,2,1,2,1},{1,2,1,2,1},{1,2,1,2,1},{1,1,1,2,1}};
+		int[][] heights =  {{1,2,2},{3,8,2},{5,3,5}};
 		System.out.println(minimumEffortPath.minimumEffortPath(heights));
 	}
 }
