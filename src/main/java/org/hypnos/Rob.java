@@ -9,15 +9,13 @@ public class Rob {
     private int[] nums;
 
     public int rob(int[] nums) {
-        if (nums.length < 2)
-            return nums[0];
-        int[] dp = new int[nums.length + 1];
-        dp[0] = 0;
-        dp[1] = nums[0];
-        for (int i = 2; i < dp.length; ++i) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i - 1]);
-        }
-        return dp[dp.length - 1];
+		int f0 = 0, f1 = 0;
+		for (int num : nums) {
+			int newF = Math.max(f1, f0 + num);
+			f0 = f1;
+			f1 = newF;
+		}
+		return f1;
     }
 
     public static void main(String[] args) {
