@@ -6,23 +6,17 @@ package org.hypnos;
 public class MaxSubarraySumCircular {
 
 	public int maxSubarraySumCircular(int[] nums) {
-		int maxAns = Integer.MIN_VALUE;
-		int minAns = 0;
-		int maxSum = 0;
-		int minSum = 0;
-		int sum = 0;
+		int maxAns = Integer.MIN_VALUE, minAns = 0;
+		int maxSum = 0, minSum = 0, sum = 0;
 		for (int num : nums) {
 			sum += num;
 			maxSum += num;
 			minSum += num;
 			maxAns = Math.max(maxAns, maxSum);
-			if (maxSum < 0)
-				maxSum = 0;
 			minAns = Math.min(minAns, minSum);
-			if (minSum > 0)
-				minSum = 0;
+			if (maxSum < 0) maxSum = 0;
+			if (minSum > 0) minSum = 0;
 		}
-
 		return Math.max(maxAns, sum == minAns ? maxAns : sum - minAns);
 	}
 
