@@ -6,16 +6,21 @@ package org.hypnos;
  */
 public class JewelleryValue {
 
+    /**
+     * 原址修改
+     */
     public int jewelleryValue(int[][] frame) {
         int m = frame.length;
         int n = frame[0].length;
-        int[] memo = new int[n + 1];
-        for (int i = 1; i < m + 1; ++i) {
-            for (int j = 1; j < n + 1; ++j) {
-                memo[j] = Math.max(memo[j], memo[j - 1]) + frame[i - 1][j - 1];
+        for (int j = 1; j < n; ++j) {
+            frame[0][j] += frame[0][j - 1];
+        }
+        for (int i = 1; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                frame[0][j] = Math.max(frame[0][j], (j - 1) < 0 ? 0 : frame[0][j - 1]) + frame[i][j];
             }
         }
-        return memo[n];
+        return frame[0][n - 1];
     }
 
     public static void main(String[] args) {
