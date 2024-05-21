@@ -2,6 +2,7 @@ package org.hypnos;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,9 +12,7 @@ public class ValidPath2 {
 
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         List<Integer>[] adj = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            adj[i] = new ArrayList<>();
-        }
+        Arrays.setAll(adj, e -> new ArrayList<>());
         for (int[] edge : edges) {
             adj[edge[0]].add(edge[1]);
             adj[edge[1]].add(edge[0]);
