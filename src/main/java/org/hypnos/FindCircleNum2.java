@@ -31,9 +31,6 @@ public class FindCircleNum2 {
     }
 
     private int find(int[] parents, int i) {
-        if (parents[i] != i) {
-            parents[i] = find(parents, parents[i]);
-        }
-        return parents[i];
+        return parents[i] == i ? i : (parents[i] = find(parents, parents[i]));
     }
 }
