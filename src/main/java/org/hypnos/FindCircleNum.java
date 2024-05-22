@@ -30,7 +30,6 @@ public class FindCircleNum {
 
 	public static void main(String[] args) {
 		int[][] isConnected = {{1,0,0,1},{0,1,1,0},{0,1,1,1},{1,0,1,1}};
-
 		FindCircleNum findCircleNum = new FindCircleNum();
 		System.out.println(findCircleNum.findCircleNum(isConnected));
 	}
