@@ -10,17 +10,15 @@ import java.util.List;
  */
 public class Convert {
     public String convert(String s, int numRows) {
-        List<Character>[] ila = new List[numRows];
-        Arrays.setAll(ila, e -> new ArrayList<>());
+        StringBuilder[] sr = new StringBuilder[numRows];
+        Arrays.setAll(sr, e -> new StringBuilder());
         int[] indexArr = getIndexArr(numRows, s.length());
-        for (int i = 0; i < s.length(); ++i) {
-            ila[indexArr[i]].add(s.charAt(i));
-        }
-        StringBuilder sb = new StringBuilder();
-        for (List<Character> il : ila)
-            for (Character character : il)
-                sb.append(character);
-        return sb.toString();
+        for (int i = 0; i < s.length(); ++i)
+            sr[indexArr[i]].append(s.charAt(i));
+        StringBuilder ans = new StringBuilder();
+        for (StringBuilder sb : sr)
+            ans.append(sb);
+        return ans.toString();
     }
 
     private int[] getIndexArr(int n, int m) {
