@@ -10,18 +10,14 @@ public class MissingRolls {
 	public int[] missingRolls(int[] rolls, int mean, int n) {
 		int m = rolls.length;
 		int nm = m + n;
-		int total = nm * mean;
-		int sum = 0;
-		for (int i = 0; i < rolls.length; i++)
-			sum += rolls[i];
-		int sub = total - sum;
-		if (sub < n || sub > 6*n)
+		int sub = nm * mean;
+		for (int roll : rolls) sub -= roll;
+		if (sub < n || sub > 6 * n)
 			return new int[0];
 		int[] result = new int[n];
 		Arrays.fill(result, 1);
 		sub -= n;
-		int i = 0;
-		while (sub > 0 && i < n) {
+		for (int i = 0; i < n && sub > 0; ++i) {
 			if (sub <= 5) {
 				result[i] += sub;
 				break;
@@ -29,7 +25,6 @@ public class MissingRolls {
 				result[i] += 5;
 				sub -= 5;
 			}
-			i++;
 		}
 		return result;
 	}
