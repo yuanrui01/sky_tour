@@ -6,30 +6,26 @@ package org.hypnos;
 public class MinSwaps {
 
 	public int minSwaps(int[] nums) {
-		int oneCount = 0;
-		for (int num : nums) {
+		int window = 0;
+		for (int num : nums)
 			if (num == 1)
-				oneCount++;
-		}
+				window++;
 		int length = nums.length;
-		if (oneCount == length)
+		if (window == length)
 			return 0;
-
 		int tOneCount = 0;
-		int window = oneCount;
-		for (int i = 0; i < window; ++i) {
+		for (int i = 0; i < window; ++i)
 			if (nums[i] == 1)
 				tOneCount++;
-		}
 		int maxOneCount = tOneCount;
 		for (int k = 0; k < length - 1; ++k) {
-			if (nums[(k + length + window) % length] == 1)
+			if (nums[(k + window) % length] == 1)
 				tOneCount++;
-			if (nums[(k + length) % length] == 1)
+			if (nums[k % length] == 1)
 				tOneCount--;
 			maxOneCount = Math.max(maxOneCount, tOneCount);
 		}
-		return oneCount - maxOneCount;
+		return window - maxOneCount;
 	}
 
 }
