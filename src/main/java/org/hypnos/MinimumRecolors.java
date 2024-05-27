@@ -9,18 +9,12 @@ public class MinimumRecolors {
     public int minimumRecolors(String blocks, int k) {
         char[] charArray = blocks.toCharArray();
         int bCnt = 0;
-        for (int i = 0; i < k; i++) {
-            if (charArray[i] == 'B')
-                bCnt++;
-        }
+        for (int i = 0; i < k; i++)
+            if (charArray[i] == 'B') bCnt++;
         int maxBCnt = bCnt;
         for (int i = k; i < blocks.length(); i++) {
-            if (charArray[i] == 'B') {
-                bCnt++;
-            }
-            if (charArray[i - k] == 'B') {
-                bCnt--;
-            }
+            if (charArray[i] == 'B') bCnt++;
+            if (charArray[i - k] == 'B') bCnt--;
             maxBCnt = Math.max(maxBCnt, bCnt);
         }
         return k - maxBCnt;
