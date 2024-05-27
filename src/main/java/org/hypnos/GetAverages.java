@@ -14,16 +14,16 @@ public class GetAverages {
         Arrays.fill(result, -1);
         if (nums.length >= windowsSize) {
             long sum = 0;
-            for (int i = 0; i < windowsSize; i++) {
+            for (int i = 0; i < windowsSize; i++)
                 sum += nums[i];
-            }
-            for (int i = k; i < nums.length - k; ++i) {
+            int i = k;
+            while (i < nums.length - k - 1) {
                 result[i] = (int) (sum / windowsSize);
-                if (i != nums.length - k - 1) {
-                    sum -= nums[i - k];
-                    sum += nums[i + k + 1];
-                }
+                sum -= nums[i - k];
+                sum += nums[i + k + 1];
+                i++;
             }
+            result[i] = (int) (sum / windowsSize);
         }
         return result;
     }
