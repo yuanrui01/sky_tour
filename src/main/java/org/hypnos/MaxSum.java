@@ -18,25 +18,31 @@ public class MaxSum {
         for (int i = 0; i < k; ++i) {
             Integer iNum = nums.get(i);
             tSum += iNum;
+            //===========================
             Integer iNumCount = countMap.getOrDefault(iNum, 0);
             if (iNumCount == 0)
                 differentCount++;
             countMap.merge(iNum, 1, Integer::sum);
         }
+        //===========================
         if (differentCount >= m)
             ans = tSum;
+        //===========================
         for (int i = k; i < nums.size(); ++i) {
             Integer iNum = nums.get(i);
             tSum += iNum;
             tSum -= nums.get(i - k);
+            //===========================
             Integer iNumCount = countMap.getOrDefault(iNum, 0);
             if (iNumCount == 0)
                 differentCount++;
             countMap.merge(iNum, 1, Integer::sum);
+            //===========================
             Integer preKCount = countMap.get(nums.get(i - k));
             countMap.put(nums.get(i - k), --preKCount);
             if (preKCount == 0)
                 differentCount--;
+            //===========================
             if (differentCount >= m)
                 ans = Math.max(ans, tSum);
         }
