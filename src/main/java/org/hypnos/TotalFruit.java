@@ -7,27 +7,22 @@ public class TotalFruit {
 
 	public int totalFruit(int[] fruits) {
 		int ans = 0;
-		int pBlock = 0;
-		int ppBlock = 0;
-		int ppType = -1;
-		int pType = -1;
+		int pBlock = 0; // 上个水果块的大小
+		int pType = -1; // 上个块水果类型
 		int n = fruits.length;
-		int i = 0;
-		while (i < n) {
-			int curBlock = 1;
+		for (int i = 0; i < n; i++) {
+			int curBlock = 1; // 当前水果块大小
 			while (i + 1 < n && fruits[i] ==  fruits[i + 1]) {
 				curBlock++;
 				i++;
 			}
-			int newRes = pBlock + curBlock;
+			int newRes = pBlock + curBlock; // 当前水果块 + 上一水果块
 			ans = Math.max(ans, newRes);
-			ppBlock = pBlock;
 			pBlock = curBlock;
-			ppType = pType;
+			if (i + 1 < n && fruits[i + 1] == pType) {
+				pBlock = newRes; // 如果下一个水果块类型跟上个水果块类型一样，合并水果块
+			}
 			pType = fruits[i];
-			if (i + 1 < n && fruits[i + 1] == ppType)
-				pBlock += ppBlock;
-			++i;
 		}
 		return ans;
 	}
