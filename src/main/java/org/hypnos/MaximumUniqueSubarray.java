@@ -13,14 +13,12 @@ public class MaximumUniqueSubarray {
 		Map<Integer, Integer> map = new HashMap<>();
 		int[] preSum = new int[n];
 		preSum[0] = nums[0];
-		for (int i = 1; i < n; ++i) {
+		for (int i = 1; i < n; ++i)
 			preSum[i] = preSum[i - 1] + nums[i];
-		}
 
 		int left = 0;
 		int right = 0;
 		int ans = 0;
-
 		while (right < n) {
 			map.put(nums[right], right);
 			while (right + 1 < n && map.getOrDefault(nums[right + 1], - 1) < left) {
@@ -29,15 +27,14 @@ public class MaximumUniqueSubarray {
 			}
 			ans = Math.max(ans, preSum[right] - preSum[left] + nums[left]);
 			if (right + 1 < n)
-				left =  Math.max(left, map.getOrDefault(nums[right + 1], -1) + 1);
+				left = map.get(nums[right + 1]) + 1;
 			right++;
 		}
-
 		return  ans;
 	}
 
 	public static void main(String[] args) {
-		int[] nums = {5,2,1,2,5,2,1,2,5};
+		int[] nums = {4,2,4,5,6};
 
 		MaximumUniqueSubarray maximumUniqueSubarray = new MaximumUniqueSubarray();
 		System.out.println(maximumUniqueSubarray.maximumUniqueSubarray(nums));
