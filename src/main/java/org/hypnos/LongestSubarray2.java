@@ -3,6 +3,7 @@ package org.hypnos;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.TreeMap;
 
 /**
  * 1438. 绝对差不超过限制的最长连续子数组
@@ -34,6 +35,26 @@ public class LongestSubarray2 {
         if (queue.isEmpty())
             return true;
         return Math.abs(queue.peek() - target) <= limit;
+    }
+
+    public int longestSubarray2(int[] nums, int limit) {
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        int n = nums.length;
+        int left = 0, right = 0;
+        int ret = 0;
+        while (right < n) {
+            map.merge(nums[right], 1, Integer::sum);
+            while (map.lastKey() - map.firstKey() > limit) {
+                map.merge(nums[left], -1, Integer::sum);
+                if (map.get(nums[left]) == 0) {
+                    map.remove(nums[left]);
+                }
+                left++;
+            }
+            ret = Math.max(ret, right - left + 1);
+            right++;
+        }
+        return ret;
     }
 
     public static void main(String[] args) {
