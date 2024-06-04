@@ -27,9 +27,7 @@ public class CountPairsOfConnectableServers {
 	}
 
 	private int calc(List<int[]>[] g, boolean[] vis, int c, int signalSpeed) {
-		List<int[]> other = g[c];
-		if (other.size() == 1)
-			return 0;
+		if (g[c].size() == 1) return 0;
 		vis[c] = true;
 		List<Integer> list = new ArrayList<>();
 		for (int[] v : g[c]) {
@@ -40,23 +38,18 @@ public class CountPairsOfConnectableServers {
 			if (res > 0)
 				list.add(res);
 		}
-		if (list.size() == 1)
-			return 0;
-		else {
-			int res = 0;
-			for (int i = 0; i < list.size() - 1; ++i) {
-				for (int j = i + 1; j < list.size(); ++j) {
-					res += list.get(i)*list.get(j);
-				}
-			}
-			return res;
-		}
+		int res = 0;
+		if (list.size() > 1)
+			for (int i = 0; i < list.size() - 1; ++i)
+				for (int j = i + 1; j < list.size(); ++j)
+					res += list.get(i) * list.get(j);
+		return res;
 	}
 
 	private int dfs(List<int[]>[] g, boolean[] vis, int c, int inherit, int signalSpeed) {
 		vis[c] = true;
 		int res = 0;
-		for (int[] v : g[c]) {
+		for (int[] v : g[c])
 			if (!vis[v[0]]) {
 				inherit += v[1];
 				if (inherit % signalSpeed == 0)
@@ -64,7 +57,6 @@ public class CountPairsOfConnectableServers {
 				res += dfs(g, vis, v[0], inherit, signalSpeed);
 				inherit -= v[1];
 			}
-		}
 		return res;
 	}
 
