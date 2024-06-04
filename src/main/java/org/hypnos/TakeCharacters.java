@@ -10,10 +10,8 @@ public class TakeCharacters {
         int[] sMode = new int[3];
         char[] arr = s.toCharArray();
         int n = arr.length;
-        for (char c : arr) {
+        for (char c : arr)
             sMode[c - 'a']++;
-        }
-
         for (int i = 0; i < sMode.length; ++i) {
             sMode[i] -= k;
             if (sMode[i] < 0)
@@ -24,7 +22,6 @@ public class TakeCharacters {
         int right = 0;
         int ans = -1;
         int[] tMode = new int[3];
-
         while (right < n) {
             int rIndex = arr[right] - 'a';
             tMode[rIndex]++;
@@ -35,7 +32,7 @@ public class TakeCharacters {
             ans = Math.max(ans, right - left + 1);
             right++;
         }
-        return ans == -1 ? -1 : (n - ans);
+        return ans == -1 ? -1 : n - ans;
     }
 
     public static void main(String[] args) {
