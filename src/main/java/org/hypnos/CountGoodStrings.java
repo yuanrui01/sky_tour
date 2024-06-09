@@ -1,52 +1,23 @@
 package org.hypnos;
 
-import java.util.Arrays;
-
 public class CountGoodStrings {
 
-    private static final int LIMIT = 1000000007;
-    private int[] memo;
-    private int zero;
-    private int one;
+	private static final int LIMIT = 1_000_000_007;
 
-    // 5 10 11
-    public int countGoodStrings(int low, int high, int zero, int one) {
-        memo = new int[high + 1];
-        this.zero = zero;
-        this.one = one;
-
-        Arrays.fill(memo, -1);
-        long ans = 0L;
-        dp(memo, high);
-        for (int i = low; i <= high; ++i) {
-            if (memo[i] != -1) {
-                ans = (ans + memo[i]) % LIMIT;
-            } else {
-                System.out.println("happen " + i);
-            }
-        }
-        return (int)ans;
-    }
-
-
-    private int dp(int[] memo, int target) {
-        if (target == 0) {
-            return 1;
-        }
-        if (memo[target] != -1) {
-            return memo[target];
-        }
-
-        long res = 0;
-        if (target - zero >= 0) {
-            res = dp(memo, target - zero) % LIMIT;
-        }
-        if (target - one >= 0) {
-            res = (dp(memo, target - one) + res) % LIMIT;
-        }
-        memo[target] = (int)res;
-        return (int)res;
-    }
+	public int countGoodStrings(int low, int high, int zero, int one) {
+		int[] ans = new int[high + 1];
+		int total = 0;
+		ans[0] = 1;
+		for(int i = 1; i <= high; ++i) {
+			if (i >= zero)
+				ans[i] = ans[i - zero] % LIMIT;
+			if (i >= one)
+				ans[i] = (ans[i] + ans[i - one]) % LIMIT;
+			if (i >= low)
+				total = (total + ans[i]) % LIMIT;
+		}
+		return total;
+	}
 
     public static void main(String[] args) {
         CountGoodStrings countGoodStrings = new CountGoodStrings();
