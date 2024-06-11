@@ -16,7 +16,7 @@ public class CountHousePlacements {
             f0 = f1;
             f1 = newF;
         }
-        return (int) ((1L * f1 * f1) % LIMIT);
+        return (int) ((long) f1 * f1 % LIMIT);
     }
 
     public static void main(String[] args) {
