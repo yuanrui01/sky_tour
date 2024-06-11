@@ -1,19 +1,32 @@
 package org.hypnos;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 /**
  * 2266. 统计打字方案数
  */
 public class CountTexts {
 
-    private static final int LIMIT = 1000000007;
-    // 存储每个按键对应的字符数
-    private static final int[] phoneMap = {0, 0, 3, 3, 3, 3, 3, 4, 3, 4};
+	static class Node {
+		int[] cache;
+		int length;
+		int loop;
+
+		public Node(int loop) {
+			this.cache = new int[MX];
+			length = 1;
+			this.loop = loop;
+		}
+	}
+
+	private static final int MX = 100_001;
+    private static final int LIMIT = 1_000_000_007;
     // 丐版缓存
-    private static final Map<Integer, long[]> numCache = new HashMap<>();
+	private static final Node THREE_CHAR_CACHE = new Node(3);
+	private static final Node FOUR_CHAR_CACHE = new Node(4);
+
+	static {
+		THREE_CHAR_CACHE.cache[0] = 1;
+		FOUR_CHAR_CACHE.cache[0] = 1;
+	}
 
     public int countTexts(String pressedKeys) {
         long ans = 1L;
@@ -26,34 +39,33 @@ public class CountTexts {
                 i++;
                 count++;
             }
-            ans = (ans * dp(processNum, count)) % LIMIT;
+            ans = (ans * (processNum == 7 || processNum == 9 ? dp(count, FOUR_CHAR_CACHE) : dp(count, THREE_CHAR_CACHE))) % LIMIT;
             ++i;
         }
 
         return (int) ans;
     }
 
-    private long dp(int target, int count) {
-        if (numCache.get(target) != null && numCache.get(target).length > count + 1)
-            return numCache.get(target)[count];
-        long[] memo = new long[count + 1];
-        int loops = phoneMap[target];
-        memo[0] = 1L;
-        int i = 1;
-        if (numCache.get(target) != null) {
-            i = numCache.get(target).length;
-            System.arraycopy(numCache.get(target), 0, memo, 0, i);
-        }
-        while (i <= count) {
-            for (int j = 1; j <= loops; ++j) {
-                if (i - j >= 0)
-                    memo[i] = (memo[i] + memo[i - j]) % LIMIT;
-            }
-            ++i;
-        }
-        numCache.put(target, memo);
-        return memo[count];
-    }
+	private int dp(int count, Node cache) {
+		int[] globalCache = cache.cache;
+		int length = cache.length;
+		if (length > count + 1)
+			return globalCache[count];
+		int loop = cache.loop;
+		int i = length;
+		while (i <= count) {
+			int res = 0;
+			for (int j = 1; j <= loop; ++j) {
+				if (i - j >= 0) {
+					res = (res + globalCache[i - j]) % LIMIT;
+				}
+			}
+			globalCache[i] = res;
+			++i;
+		}
+		cache.length = count + 1;
+		return globalCache[count];
+	}
 
 
     public static void main(String[] args) {
