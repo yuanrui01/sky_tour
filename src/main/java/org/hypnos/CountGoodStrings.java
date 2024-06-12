@@ -20,11 +20,13 @@ public class CountGoodStrings {
 	}
 
     public static void main(String[] args) {
-        CountGoodStrings countGoodStrings = new CountGoodStrings();
-        int low = 50000;
-        int high = 99999;
-        int zero = 2;
-        int one = 3;
-        System.out.println(countGoodStrings.countGoodStrings(low, high, zero, one));
+//        CountGoodStrings countGoodStrings = new CountGoodStrings();
+//        int low = 50000;
+//        int high = 99999;
+//        int zero = 2;
+//        int one = 3;
+//        System.out.println(countGoodStrings.countGoodStrings(low, high, zero, one));
+
+		System.out.println(2000000000 % LIMIT);
     }
 }

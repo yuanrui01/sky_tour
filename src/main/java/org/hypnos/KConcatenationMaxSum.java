@@ -8,53 +8,33 @@ public class KConcatenationMaxSum {
 
     private static final int LIMIT = 1000000007;
     public int kConcatenationMaxSum(int[] arr, int k) {
-        int ans = 0;
-        int sum = 0;
-        int fullSum = 0;
-
+        int n = arr.length;
         int leftAns = 0;
         int leftSum = 0;
-
-        for (int value : arr) {
-            if (leftSum + value >= LIMIT) {
-                leftSum = (leftSum + value) % LIMIT;
-                leftAns = leftSum;
-            } else {
-                leftSum += value;
-                leftAns = Math.max(leftAns, leftSum);
-            }
-
-            if (sum + value >= LIMIT) {
-                sum = (sum + value) % LIMIT;
-                ans = sum;
-            } else {
-                sum += value;
-                ans = Math.max(ans, sum);
-            }
-
-            fullSum = (fullSum + value) % LIMIT;
-            if (sum < 0)
-                sum = 0;
-        }
-
-        int rightAns = 0;
         int rightSum = 0;
-        for (int i = arr.length - 1; i >= 0; --i) {
-            if (rightSum + arr[i] >= LIMIT) {
-                rightSum = (rightSum + arr[i]) % LIMIT;
-                rightAns = rightSum;
-            } else {
-                rightSum += arr[i];
-                rightAns = Math.max(rightAns, rightSum);
-            }
+        int rightAns = 0;
+        int singleSum = 0;
+        int singleAns = 0;
+        for(int i = 0; i < n; ++i) {
+            int left = arr[i];
+            int right = arr[n - i - 1];
+            leftSum += left;
+            rightSum += right;
+            singleSum += left;
+            singleAns = Math.max(singleAns, singleSum);
+            if (singleSum < 0)
+                singleSum = 0;
+            leftAns = Math.max(leftAns, leftSum);
+            rightAns = Math.max(rightAns, rightSum);
         }
-        if (leftAns + rightAns > ans && k > 1) {
-            long mid = (fullSum * 1L *(k - 2)) % LIMIT;
-            mid = mid > 0 ? mid : 0;
-            return (int) ((leftAns + rightAns + mid) % LIMIT);
-        } else {
-            return ans;
-        }
+        if (k == 1)
+            return singleAns;
+        int deq = leftAns + rightAns;
+        leftSum = Math.max(leftSum, 0);
+        if (singleAns >= deq)
+            return singleAns;
+        else
+            return (int)((deq + (long)(k - 2) * leftSum) % LIMIT);
     }
 
 
