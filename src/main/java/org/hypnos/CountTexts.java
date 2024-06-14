@@ -42,7 +42,7 @@ public class CountTexts {
             ans = (ans * (processNum == 7 || processNum == 9 ? dp(count, FOUR_CHAR_CACHE) : dp(count, THREE_CHAR_CACHE))) % LIMIT;
             ++i;
         }
-
+		
         return (int) ans;
     }
 
