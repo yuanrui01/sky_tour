@@ -22,7 +22,7 @@ public class PathsWithMaxScore {
 		}
 		int[][] ans = new int[m][n];
 		ans[m - 1][n - 1] = 0;
-		int[][] count = new int[m][n];
+		long[][] count = new long[m][n];
 		count[m - 1][n - 1] = 1;
 		for (int i = m - 2; i >= 0; --i) {
 			if (grid[i][n - 1] == 'X' || ans[i + 1][n - 1] == Integer.MIN_VALUE) {
@@ -62,14 +62,14 @@ public class PathsWithMaxScore {
 				if (i1 == maxi)
 					count[i][j] = count[i + 1][j + 1];
 				if (i2 == maxi)
-					count[i][j] = (count[i][j] + count[i][j + 1]) % LIMIT;
+					count[i][j] = count[i][j] + count[i][j + 1];
 				if (i3 == maxi)
-					count[i][j] = (count[i][j] + count[i + 1][j]) % LIMIT;
+					count[i][j] = ((count[i][j] + count[i + 1][j]) % LIMIT);
 			}
 		}
 		if (ans[0][0] == Integer.MIN_VALUE)
 			return new int[]{0, 0};
-		return new int[]{ans[0][0], count[0][0]};
+		return new int[]{ans[0][0], (int) (count[0][0] % LIMIT)};
 	}
 
 	public static void main(String[] args) {
