@@ -1,37 +1,32 @@
 package org.dp;
 
+import java.util.Arrays;
+
 /**
  * 174. 地下城游戏
  */
 public class CalculateMinimumHP {
 
 	public int calculateMinimumHP(int[][] dungeon) {
+		// 定义f(i,j)为 从 （i，j）到终点所需要的最少生命值
+		// f(i,j) = Max(1, Min(f(i, j + 1)， f(i+1, j)) - dungeon(i, j))
 		int m = dungeon.length;
 		int n = dungeon[0].length;
-
-		// 创建 DP 表格
 		int[][] dp = new int[m + 1][n + 1];
-
-		// 将表格初始化为无穷大，除了骑士到达终点的下一个虚拟点（用于简化边界条件）
-		for (int i = 0; i <= m; i++) {
-			for (int j = 0; j <= n; j++) {
-				dp[i][j] = Integer.MAX_VALUE;
-			}
-		}
-
-		// 设置虚拟终点的健康点数为 1
+		// 初始化状态
+		for (int[] row : dp)
+			Arrays.fill(row, Integer.MAX_VALUE);
 		dp[m][n - 1] = 1;
 		dp[m - 1][n] = 1;
-
-		// 从右下角向左上角填充 DP 表
-		for (int i = m - 1; i >= 0; i--) {
-			for (int j = n - 1; j >= 0; j--) {
-				int minHealthOnExit = Math.min(dp[i + 1][j], dp[i][j + 1]);
-				dp[i][j] = Math.max(minHealthOnExit - dungeon[i][j], 1);
-			}
-		}
-
-		// 左上角的值即为骑士的初始健康点数
+		for(int i = m - 1; i >= 0; --i)
+			for (int j = n - 1; j >= 0;  --j)
+				dp[i][j] = Math.max(1, Math.min(dp[i+1][j], dp[i][j+1]) - dungeon[i][j]);
 		return dp[0][0];
+	}
+
+	public static void main(String[] args) {
+		int[][] dungeon =  {{-2,-3,3},{-5,-10,1},{10,30,-5}};
+		CalculateMinimumHP calculateMinimumHP = new CalculateMinimumHP();
+		System.out.println(calculateMinimumHP.calculateMinimumHP(dungeon));
 	}
 }
