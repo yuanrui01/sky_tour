@@ -17,10 +17,7 @@ public class NextGreaterElements {
 		for(int i = n2; i >= 0; --i) {
 			while(!stack.isEmpty() && stack.peek() < nums[i % n])
 				stack.pop();
-			if (stack.isEmpty())
-				ans[i % n] = -1;
-			else
-				ans[i % n] = stack.peek();
+			ans[i % n] = stack.isEmpty() ? -1 : stack.peek();
 			stack.push(nums[i % n]);
 		}
 		return ans;
