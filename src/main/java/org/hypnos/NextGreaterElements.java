@@ -11,13 +11,17 @@ public class NextGreaterElements {
 
 	public int[] nextGreaterElements(int[] nums) {
 		int n = nums.length;
-		Deque<Integer> stack = new LinkedList<>();
+		int n2 = 2 * n - 1;
 		int[] ans = new int[n];
-		Arrays.fill(ans, -1);
-		for (int i = 0; i < 2*n - 1; ++i) {
-			while(!stack.isEmpty() && nums[stack.peek()] < nums[i%n])
-				ans[stack.pop()] = nums[i%n];
-			stack.push(i%n);
+		Deque<Integer> stack = new LinkedList<>();
+		for(int i = n2; i >= 0; --i) {
+			while(!stack.isEmpty() && stack.peek() < nums[i % n])
+				stack.pop();
+			if (stack.isEmpty())
+				ans[i % n] = -1;
+			else
+				ans[i % n] = stack.peek();
+			stack.push(nums[i % n]);
 		}
 		return ans;
 	}
