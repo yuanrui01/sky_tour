@@ -21,7 +21,7 @@ public class HasValidPath {
         return dfs(0, 0, 0);
     }
 
-    private boolean dfs(int i, int j, int c) {
+    private boolean dfs(int i, int j, int c) {  
         if (c > m - i + n - j - 1)
             return false;
         if (i == m - 1 && j == n - 1)
