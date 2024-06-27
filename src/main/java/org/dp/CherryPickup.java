@@ -17,12 +17,9 @@ public class CherryPickup {
         this.n = grid[0].length;
         this.grid = grid;
         int[][][] memo = new int[m][n][n];
-        for (int[][] rows : memo) {
-            for (int[] row : rows) {
+        for (int[][] rows : memo)
+            for (int[] row : rows)
                 Arrays.fill(row, -1);
-            }
-        }
-
         return dfs(0, 0, n - 1, memo);
     }
 
@@ -32,11 +29,9 @@ public class CherryPickup {
         if (memo[i][j][k] != -1)
             return memo[i][j][k];
         int res = 0;
-        for (int j2 = j - 1; j2 <= j + 1; ++j2) {
-            for (int k2 = k - 1; k2 <= k + 1; ++k2) {
+        for (int j2 = j - 1; j2 <= j + 1; ++j2)
+            for (int k2 = k - 1; k2 <= k + 1; ++k2)
                 res = Math.max(res, dfs(i + 1, j2, k2, memo));
-            }
-        }
         res += grid[i][j] + (k != j ? grid[i][k] : 0);
         memo[i][j][k] = res;
         return res;
