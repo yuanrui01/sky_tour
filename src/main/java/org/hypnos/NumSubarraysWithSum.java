@@ -1,6 +1,8 @@
 package org.hypnos;
 
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,4 +22,14 @@ public class NumSubarraysWithSum {
         }
         return ans;
     }
+
+	public static void main(String[] args) {
+		int[] nums = {10, 0, 1, 1, 1, 1};
+		int goal = 4;
+		NumSubarraysWithSum numSubarraysWithSum = new NumSubarraysWithSum();
+		System.out.println(numSubarraysWithSum.numSubarraysWithSum(nums, goal));
+		Deque<Integer> queue = new ArrayDeque<>();
+		queue.add(1);
+		queue.remove();
+	}
 }
