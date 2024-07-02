@@ -12,13 +12,10 @@ public class MaximumPrimeDifference {
         isPrime = new boolean[101];
         Arrays.fill(isPrime, true);
         isPrime[1] = false;
-        for (int i = 2; i * i< 101; ++i) {
-            if (isPrime[i]) {
-                for (int j = i * i; j < 101; j += i) {
+        for (int i = 2; i * i < 101; ++i)
+            if (isPrime[i])
+                for (int j = i * i; j < 101; j += i)
                     isPrime[j] = false;
-                }
-            }
-        }
     }
     public int maximumPrimeDifference(int[] nums) {
         int firstIndex = -1;
