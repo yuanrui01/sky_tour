@@ -18,9 +18,8 @@ public class MaximumPoints {
 				currentEnergy = currentEnergy % enemyEnergies[left];
 			} else if (ans > 0) {
 				currentEnergy +=  enemyEnergies[--right];
-			} else {
+			} else
 				break;
-			}
 		}
 		return ans;
 	}
