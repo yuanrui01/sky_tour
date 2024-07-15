@@ -4,7 +4,6 @@ package org.hypnos;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * 841. 钥匙和房间 - DFS-stack/BFS-queue
@@ -16,6 +15,7 @@ public class CanVisitAllRooms {
         boolean[] visited = new boolean[n];
         int count = 0;
         Deque<Integer> stack = new ArrayDeque<>();
+		
         stack.add(0);
         while (!stack.isEmpty()) {
             Integer pop = stack.pop();
