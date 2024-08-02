@@ -1,9 +1,6 @@
 package org.hypnos;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 3128. 直角三角形
  */
