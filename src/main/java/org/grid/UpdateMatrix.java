@@ -24,11 +24,13 @@ public class UpdateMatrix {
         }
         while (!queue.isEmpty()) {
             int[] p = queue.poll();
+            int i = p[0];
+            int j = p[1];
             for (int[] d : dirs) {
-                int x = p[0] + d[0];
-                int y = p[1] + d[1];
+                int x = i + d[0];
+                int y = j + d[1];
                 if (x >= 0 && x < m && y >= 0 && y < n && mat[x][y] == 1 && ans[x][y] == 0) {
-                    ans[x][y] = ans[p[0]][p[1]] + 1;
+                    ans[x][y] = ans[i][j] + 1;
                     queue.add(new int[]{x, y});
                 }
             }
