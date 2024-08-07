@@ -19,7 +19,7 @@ public class NearestExit {
         int initX = entrance[0];
         int initY = entrance[1];
         queue.add(new int[] {initX, initY, 0});
-        vis[entrance[0]][entrance[1]] = true;
+        vis[initX][initY] = true;
         while (!queue.isEmpty()) {
             int[] p = queue.poll();
             int i = p[0];
