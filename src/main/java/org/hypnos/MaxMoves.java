@@ -12,25 +12,24 @@ public class MaxMoves {
 	public int maxMoves(int[][] grid) {
 		int m = grid.length;
 		int n = grid[0].length;
-		boolean[][] vis = new boolean[m][n];
 		int ans = 0;
 		for (int i = 0; i < m; ++i) {
-			ans = Math.max(ans, dfs(grid, vis, m, n, i, 0));
+			ans = Math.max(ans, dfs(grid, m, n, i, 0));
 		}
 		return ans;
 	}
 
 
-	private int dfs(int[][] grid, boolean[][] vis, int m, int n, int i, int j) {
-		vis[i][j] = true;
+	private int dfs(int[][] grid, int m, int n, int i, int j) {
 		int ans = 0;
 		for (int[] d : ds) {
 			int x = i + d[0];
 			int y = j + d[1];
-			if (x >= 0 && x < m && y >= 0 && y < n && !vis[x][y] && grid[x][y] > grid[i][j]) {
-				ans = Math.max(ans, dfs(grid, vis, m, n, x, y) + 1);
+			if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] > grid[i][j]) {
+				ans = Math.max(ans, dfs(grid, m, n, x, y) + 1);
 			}
 		}
+		grid[i][j] = 0;
 		return ans;
 	}
 
