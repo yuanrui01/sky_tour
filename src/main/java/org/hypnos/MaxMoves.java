@@ -2,42 +2,41 @@ package org.hypnos;
 
 /**
  * 2684. 矩阵中移动的最大次数
+ * 从单元格 (row, col) 可以移动到
+ * (row - 1, col + 1)、(row, col + 1) 和 (row + 1, col + 1) 三个单元格中任一满足值 严格 大于当前单元格的单元格。
  */
 public class MaxMoves {
 
-	private int[][] cache;
-	private int[][] grid;
-	private int m;
-	private int n;
+	private int[][] ds = {{-1,1},{0,1},{1,1}};
 
 	public int maxMoves(int[][] grid) {
-		this.m = grid.length;
-		this.n = grid[0].length;
-		this.cache = new int[m][n];
-		this.grid = grid;
+		int m = grid.length;
+		int n = grid[0].length;
+		boolean[][] vis = new boolean[m][n];
 		int ans = 0;
-		for (int i = 0; i < m; i++) {
-			ans = Math.max(ans, dp(i, 0));
+		for (int i = 0; i < m; ++i) {
+			ans = Math.max(ans, dfs(grid, vis, m, n, i, 0));
 		}
 		return ans;
 	}
 
-	private int dp(int i, int j) {
-		if (j == n - 1)
-			return 0;
-		if (cache[i][j] != 0)
-			return cache[i][j];
+
+	private int dfs(int[][] grid, boolean[][] vis, int m, int n, int i, int j) {
+		vis[i][j] = true;
 		int ans = 0;
-		if (i - 1 >= 0 && grid[i - 1][j + 1] > grid[i][j]) {
-			ans = Math.max(ans, dp(i - 1, j + 1) + 1);
+		for (int[] d : ds) {
+			int x = i + d[0];
+			int y = j + d[1];
+			if (x >= 0 && x < m && y >= 0 && y < n && !vis[x][y] && grid[x][y] > grid[i][j]) {
+				ans = Math.max(ans, dfs(grid, vis, m, n, x, y) + 1);
+			}
 		}
-		if (grid[i][j + 1] > grid[i][j]) {
-			ans = Math.max(ans, dp(i, j + 1) + 1);
-		}
-		if (i + 1 < m && grid[i + 1][j + 1] > grid[i][j]) {
-			ans = Math.max(ans, dp(i + 1, j + 1) + 1);
-		}
-		cache[i][j] = ans;
 		return ans;
+	}
+
+	public static void main(String[] args) {
+		MaxMoves maxMoves = new MaxMoves();
+		int[][] grid = {{2,4,3,5},{5,4,9,3},{3,4,2,11},{10,9,13,15}};
+		System.out.println(maxMoves.maxMoves(grid));
 	}
 }
