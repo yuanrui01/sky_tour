@@ -9,18 +9,15 @@ import java.util.Queue;
 public class MaxDistance {
 
 	private int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
-
 	public int maxDistance(int[][] grid) {
 		int ans = -1;
 		int m = grid.length;
 		int n = grid[0].length;
 		Queue<int[]> queue = new LinkedList<>();
-		for (int i = 0; i < m; ++i) {
-			for (int j = 0; j < n; ++j) {
+		for (int i = 0; i < m; ++i)
+			for (int j = 0; j < n; ++j)
 				if (grid[i][j] == 1)
 					queue.add(new int[]{i,j,0});
-			}
-		}
 		while (!queue.isEmpty()) {
 			int[] p = queue.poll();
 			for (int[] dir : dirs) {
