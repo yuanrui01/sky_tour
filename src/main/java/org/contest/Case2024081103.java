@@ -9,16 +9,17 @@ public class Case2024081103 {
 
 	private int MOD = 1_000_000_007;
 	private int[][][] memo;
+	private int LIMIT = 1000;
 
 	public int countOfPairs(int[] nums) {
 		int n = nums.length;
-		memo = new int[n][1001][1001];
+		memo = new int[n][LIMIT + 1][LIMIT + 1];
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j <= 1000; j++) {
+			for (int j = 0; j <= LIMIT; j++) {
 				Arrays.fill(memo[i][j], -1);
 			}
 		}
-		return dfs(nums, 0, 0, 1000);
+		return dfs(nums, 0, 0, LIMIT);
 	}
 
 	private int dfs(int[] nums, int idx, int prev, int maxArr2) {
