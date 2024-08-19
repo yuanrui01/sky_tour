@@ -12,9 +12,8 @@ public class ShortestPath {
 	private int[][] dirs = {{0,1}, {1,0}, {0,-1},{-1,0}};
 
 	public int shortestPath(int[][] grid, int k) {
-		int m = grid.length;
-		int n = grid[0].length;
-		if (m == 1 && n == 1) return 0;
+		int m = grid.length, n = grid[0].length;
+		if (k >= m + n - 3) return m + n - 2;
 		Queue<int[]> queue = new LinkedList<>();
 		int[][] vis = new int[m][n];
 		for (int[] vi : vis)
