@@ -1,5 +1,6 @@
 package org.grid;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,9 +16,11 @@ public class ShortestPath {
 		int n = grid[0].length;
 		if (m == 1 && n == 1) return 0;
 		Queue<int[]> queue = new LinkedList<>();
-		boolean[][][] vis = new boolean[m][n][k + 1];
+		int[][] vis = new int[m][n];
+		for (int[] vi : vis)
+			Arrays.fill(vi, -1);
 		queue.add(new int[]{0, 0, 0, k});
-		vis[0][0][k] = true;
+		vis[0][0] = k;
 		while (!queue.isEmpty()) {
 			int[] poll = queue.poll();
 			for (int[] dir : dirs) {
@@ -29,12 +32,10 @@ public class ShortestPath {
 					if (x == m - 1 && y == n - 1) {
 						return z + 1;
 					}
-					if (grid[x][y] == 0 && !vis[x][y][r]) {
-						queue.add(new int[]{x,y,z+1,r});
-						vis[x][y][r] = true;
-					} else if (grid[x][y] == 1 && r > 0 && !vis[x][y][r - 1]) {
-						queue.add(new int[]{x,y,z+1,r-1});
-						vis[x][y][r - 1] = true;
+					r -= grid[x][y];
+					if (r >= 0 && r > vis[x][y]) {
+						queue.add(new int[]{x, y, z + 1, r});
+						vis[x][y] = r;
 					}
 				}
 			}
