@@ -21,16 +21,11 @@ public class KthLargest {
     public int add(int val) {
         if (this.mxHeap.size() < k) {
             mxHeap.add(val);
-            return mxHeap.peek();
-        } else {
-            if (mxHeap.peek() < val) {
-                mxHeap.poll();
-                mxHeap.add(val);
-                return mxHeap.peek();
-            } else {
-                return mxHeap.peek();
-            }
+        } else if (mxHeap.peek() < val) {
+            mxHeap.poll();
+            mxHeap.add(val);
         }
+        return mxHeap.peek();
     }
 
     public static void main(String[] args) {
