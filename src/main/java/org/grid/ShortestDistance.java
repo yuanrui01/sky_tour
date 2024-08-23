@@ -15,24 +15,34 @@ public class ShortestDistance {
 		int m = grid.length;
 		int n = grid[0].length;
 		int ones = 0;
+
 		for (int i = 0; i < m; ++i) {
 			for (int j = 0; j < n; ++j) {
-				if (grid[i][j] == 1)
+				if (grid[i][j] == 1) {
 					ones++;
+					boolean hasZeros = false;
+					for (int[] dir : dirs) {
+						int x = i + dir[0];
+						int y = j + dir[1];
+						if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == 0) {
+							hasZeros = true;
+							break;
+						}
+					}
+					if (!hasZeros)
+						return -1;
+				}
 			}
 		}
-		if (m*n == ones)
+		if (m * n == ones)
 			return -1;
+
 		int ans = Integer.MAX_VALUE;
-		boolean[][] vis = new boolean[m][n];
 		Queue<int[]> queue = new LinkedList<>();
 		for (int i = 0; i < m; ++i) {
 			for (int j = 0; j < n; ++j) {
 				if (grid[i][j] == 0) {
-					queue.clear();
-					for (boolean[] vi : vis) {
-						Arrays.fill(vi, false);
-					}
+					boolean[][] vis = new boolean[m][n];
 					int tmpDis = 0;
 					int tmpOnes = 0;
 					queue.add(new int[]{i,j,0});
