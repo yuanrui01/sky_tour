@@ -7,24 +7,27 @@ package org.hypnos;
 public class MaxVowels {
 
     public int maxVowels(String s, int k) {
-        char[] cArr = s.toCharArray();
-        int kWindowCount = 0;
-        for (int i = 0; i < k; ++i)
-            if (isVowel(cArr[i]))
-                kWindowCount++;
-
-        int ans = kWindowCount;
-        for (int i = k; i < s.length(); ++i) {
-            if (isVowel(cArr[i]))
-                kWindowCount++;
-            if (isVowel(cArr[i - k]))
-                kWindowCount--;
-            ans = Math.max(ans, kWindowCount);
-        }
-        return ans;
-    }
-
-    private static boolean isVowel(char c) {
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+		char[] arr = s.toCharArray();
+		int len = s.length();
+		int tmpAns = 0;
+		for (int i = 0; i < k; ++i) {
+			char c = arr[i];
+			if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+				tmpAns++;
+			}
+		}
+		int ans = tmpAns;
+		for (int i = k; i < len; ++i) {
+			int c = arr[i];
+			if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+				tmpAns++;
+			}
+			int ck = arr[i - k];
+			if (ck == 'a' || ck == 'e' || ck == 'i' || ck == 'o' || ck == 'u') {
+				tmpAns--;
+			}
+			ans = Math.max(ans, tmpAns);
+		}
+		return ans;
     }
 }
