@@ -8,6 +8,7 @@ import java.util.Arrays;
  */
 public class GetAverages {
 
+    // 1 2 3 4 5 6
     public int[] getAverages(int[] nums, int k) {
         int[] result = new int[nums.length];
         int windowsSize = 2 * k + 1;
@@ -30,9 +31,11 @@ public class GetAverages {
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{7,4,3,9,1,8,5,2,6};
-        int k  = 3;
-        int[] averages = new GetAverages().getAverages(nums, k);
-        System.out.println(Arrays.toString(averages));
+//        int[] nums = new int[]{7,4,3,9,1,8,5,2,6};
+//        int k  = 3;
+//        int[] averages = new GetAverages().getAverages(nums, k);
+//        System.out.println(Arrays.toString(averages));
+        System.out.println((int)'W');
+        System.out.println((int)'B');
     }
 }
