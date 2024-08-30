@@ -1,8 +1,6 @@
 package org.hypnos;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -12,22 +10,25 @@ public class SumDigitDifferences {
 
     public long sumDigitDifferences(int[] nums) {
         int digits = getDigits(nums[0]);
-        Map<Integer, Integer>[] count = new Map[digits];
-        Arrays.setAll(count, e -> new HashMap<>());
+        long[][] count = new long[digits][10];
         for (int i = 0; i < nums.length; ++i) {
             for (int j = 0; j < digits; ++j) {
-                count[j].merge(nums[i] % 10, 1, Integer::sum);
+                count[j][nums[i] % 10]++;
                 nums[i] /= 10;
             }
         }
         long ans = 0L;
         for (int i = 0; i < digits; ++i) {
-            Map<Integer, Integer> imap = count[i];
-            if (imap.size() > 1) {
-                int[] array = imap.values().stream().mapToInt(inte -> inte).toArray();
-                for (int j = 0; j < array.length - 1; ++j) {
-                    for (int k = j + 1; k < array.length; ++k) {
-                        ans += (long) array[j] * array[k];
+            long[] longs = count[i];
+            List<Long> list = new ArrayList<>();
+            for (int j = 0; j < 10; ++j) {
+                if (longs[j] != 0)
+                    list.add(longs[j]);
+            }
+            if (!list.isEmpty()) {
+                for (int j = 0; j < list.size() - 1; ++j) {
+                    for (int k = j + 1; k < list.size(); ++k) {
+                        ans += list.get(j) * list.get(k);
                     }
                 }
             }
