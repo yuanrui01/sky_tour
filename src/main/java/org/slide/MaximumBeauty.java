@@ -2,6 +2,10 @@ package org.slide;
 
 import java.util.Arrays;
 
+
+/**
+ * 2779. 数组的最大美丽值
+ */
 public class MaximumBeauty {
 
     public int maximumBeauty(int[] nums, int k) {
