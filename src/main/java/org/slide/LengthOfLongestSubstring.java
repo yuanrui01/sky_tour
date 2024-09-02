@@ -16,10 +16,8 @@ public class LengthOfLongestSubstring {
         Map<Character, Integer> map = new HashMap<>();
         int ans = 0;
         while (right < arr.length) {
-            Integer rIdx = map.get(arr[right]);
-            if (rIdx != null) {
-                left = Math.max(left, rIdx + 1);
-            }
+            Integer idx = map.getOrDefault(arr[right], -1);
+            left = Math.max(left, idx + 1);
             ans = Math.max(ans, right - left + 1);
             map.put(arr[right], right);
             right++;
