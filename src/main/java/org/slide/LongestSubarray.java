@@ -6,18 +6,19 @@ package org.slide;
  */
 public class LongestSubarray {
 
+    // 0 0 1 1 1 0 0
     public int longestSubarray(int[] nums) {
         int ans = 0;
         int left = 0, right = 0;
-        int pre0 = -1;
+        int zi = -1;
         while (right < nums.length) {
             if (nums[right] == 0) {
-                left = Math.max(left, pre0);
-                pre0 = right;
+                left = Math.max(left, zi + 1);
+                zi = right;
             }
-            ans = Math.max(ans, right - left + 1 + (pre0 == -1 ? 0 : -1));
+            ans = Math.max(ans, right - left + 1);
             right++;
         }
-        return pre0 == -1 && ans > 0 ? ans - 1 : ans;
+        return ans - 1;
     }
 }
