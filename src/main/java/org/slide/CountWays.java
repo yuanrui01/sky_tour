@@ -1,7 +1,6 @@
 package org.slide;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -20,5 +19,11 @@ public class CountWays {
             }
         }
         return ans + 1;
+    }
+
+    public static void main(String[] args) {
+        CountWays countWays = new CountWays();
+        List<Integer> integers = List.of(1, 7);
+        System.out.println(countWays.countWays(integers));
     }
 }
