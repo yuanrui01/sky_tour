@@ -13,7 +13,8 @@ public class MergeNodes {
 		ListNode hd = new ListNode();
 		ListNode cur = new ListNode(0);
 		hd.next = cur;
-		while (head != null) {
+		while (head.next != null) {
+			head = head.next;
 			if (head.val != 0) {
 				sum += head.val;
 			} else if (head.next != null) {
@@ -24,7 +25,6 @@ public class MergeNodes {
 			} else {
 				cur.val = sum;
 			}
-			head = head.next;
 		}
 		return hd.next;
 	}
