@@ -6,18 +6,11 @@ package org.hypnos;
 public class TimeRequiredToBuy {
 
 	public int timeRequiredToBuy(int[] tickets, int k) {
-		if (k == 0 && tickets[0] == 1)  return 1;
 		int ans = 0;
-		int n = tickets.length;
-		int kv = tickets[k];
-		for (int i = 0; i < n; ++i) {
-			if (i < k) {
-				ans += Math.min(kv - 1, tickets[i] - 1);
-			} else {
-				ans += Math.min(kv - 1, tickets[i]);
-			}
+		for (int i = 0; i < tickets.length; ++i) {
+			ans += Math.min(tickets[i], tickets[k] - (i > k ? 1 : 0));
 		}
-		return ans + k + 1;
+		return ans;
 	}
 
 	public static void main(String[] args) {
