@@ -1,7 +1,7 @@
 package org.hypnos;
 
 /**
- * @author: yuanrui
+ * 134. 加油站
  */
 public class CanCompleteCircuit {
 
