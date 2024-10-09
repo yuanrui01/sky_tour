@@ -19,10 +19,10 @@ public class MinimumDifference2 {
         int ans = Integer.MAX_VALUE;
         int[] digits = new int[32];
         while (right < n) {
-            addDigits(digits, nums[right]);
+            alterDigits(digits, nums[right], 1);
             ans = Math.min(ans, Math.abs(k - getNum(digits)));
             while (left < right && getNum(digits) > k) {
-                removeDigits(digits, nums[left]);
+                alterDigits(digits, nums[left], -1);
                 ans = Math.min(ans, Math.abs(k - getNum(digits)));
                 left++;
             }
@@ -31,18 +31,10 @@ public class MinimumDifference2 {
         return ans;
     }
 
-    private void addDigits(int[] digits, int n) {
+    private void alterDigits(int[] digits, int n, int flag) {
         int i = 0;
         while (n != 0) {
-            digits[i++] += n % 2;
-            n >>= 1;
-        }
-    }
-
-    private void removeDigits(int[] digits, int n) {
-        int i = 0;
-        while (n != 0) {
-            digits[i++] -= n % 2;
+            digits[i++] += flag * (n % 2);
             n >>= 1;
         }
     }
