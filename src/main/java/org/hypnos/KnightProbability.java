@@ -8,12 +8,12 @@ import java.util.Arrays;
 public class KnightProbability {
 
 	private int n;
-	private int[][] dirs = {{1,-2}, {2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};
 	private double[][][] cache;
+	private int[][] dirs = {{1,-2}, {2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};
 
 	public double knightProbability(int n, int k, int row, int column) {
 		this.n = n;
-		cache = new double[n][n][k + 1];
+		this.cache = new double[n][n][k + 1];
 		for (double[][] cs : cache) {
 			for (double[] c : cs) {
 				Arrays.fill(c, -1);
