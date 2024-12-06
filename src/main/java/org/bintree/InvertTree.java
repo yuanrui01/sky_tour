@@ -3,7 +3,7 @@ package org.bintree;
 import org.common.TreeNode;
 
 /**
- * @author: yuanrui
+ * 226. 翻转二叉树
  */
 public class InvertTree {
 
