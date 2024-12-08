@@ -2,29 +2,21 @@ package org.list;
 
 import org.common.ListNode;
 
-import java.util.*;
-
 /**
  * 206. 反转链表
  */
 public class ReverseList {
 
 	public ListNode reverseList(ListNode head) {
-		if (head == null) return null;
-		Deque<ListNode> stack = new ArrayDeque<>();
-		while (head != null) {
-			stack.push(head);
-			head = head.next;
+		ListNode pre = null;
+		ListNode cur = head;
+		while (cur != null) {
+			ListNode nxt = cur.next;
+			cur.next = pre;
+			pre = cur;
+			cur = nxt;
 		}
-		ListNode dumb = new ListNode();
-		dumb.next = stack.pop();
-		ListNode tmp = dumb.next;
-		while (!stack.isEmpty()) {
-			tmp.next = stack.pop();
-			tmp = tmp.next;
-			tmp.next = null;
-		}
-		return dumb.next;
+		return pre;
 	}
 
 	public static void main(String[] args) {
