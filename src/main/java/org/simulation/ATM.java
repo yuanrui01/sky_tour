@@ -7,36 +7,33 @@ import java.util.Arrays;
  */
 public class ATM {
 
-	private int[] deposit;
-	private int[] values = {20, 50, 100, 200, 500};
+	private final int[] deposit;
+	private final int[] values = {20, 50, 100, 200, 500};
+	private final int size = 5;
 
 	public ATM() {
-		deposit = new int[5];
+		deposit = new int[size];
 	}
 
 	public void deposit(int[] banknotesCount) {
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < size; ++i) {
 			deposit[i] += banknotesCount[i];
 		}
 	}
 
 	public int[] withdraw(int amount) {
-		int[] result = new int[5];
+		int[] result = new int[size];
 		for (int i = 4; i >= 0; --i) {
 			if (deposit[i] > 0 && amount >= values[i]) {
 				int t = amount / values[i];
-				if (t >= deposit[i]) {
-					result[i] = deposit[i];
-					deposit[i] = 0;
-				} else {
-					result[i] = t;
-					deposit[i] -= t;
-				}
+				t = Math.min(t, deposit[i]);
+				result[i] = t;
+				deposit[i] -= t;
 				amount -= values[i] * result[i];
 			}
 		}
 		if (amount != 0) {
-			for (int i = 0; i < 5; ++i) {
+			for (int i = 0; i < size; ++i) {
 				deposit[i] += result[i];
 			}
 			return new int[]{-1};
