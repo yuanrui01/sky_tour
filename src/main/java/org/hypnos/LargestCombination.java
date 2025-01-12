@@ -1,6 +1,8 @@
 package org.hypnos;
 
 
+import java.util.Arrays;
+
 /**
  * 2275. 按位与结果大于零的最长组合
  */
@@ -22,4 +24,15 @@ public class LargestCombination {
         }
         return ans;
     }
+
+//    public int largestCombination_bak(int[] candidates) {
+//        int[] cnt = new int[24];
+//        for (int candidate : candidates) {
+//            int num = candidate;
+//            for (int i = 0; num != 0 ; i++, num >>= 1) {
+//                cnt[i] += num & 1;
+//            }
+//        }
+//        return Arrays.stream(cnt).max().getAsInt();
+//    }
 }
