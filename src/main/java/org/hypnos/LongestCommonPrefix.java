@@ -6,22 +6,16 @@ package org.hypnos;
 public class LongestCommonPrefix {
 
 	public String longestCommonPrefix(String[] strs) {
-		int length = Integer.MAX_VALUE;
-		for (String str : strs) {
-			length = Math.min(length, str.length());
-		}
-		int ans = 0;
-		tag:
-		for (int i = 0; i < length; ++i) {
-			char c = strs[0].charAt(i);
-			for (int j = 1; j < strs.length; ++j) {
-				if (strs[j].charAt(i) != c) {
-					break tag;
+		String str0 = strs[0];
+		for (int i = 0; i < str0.length(); ++i) {
+			char c = str0.charAt(i);
+			for (String str : strs) {
+				if (str.length() == i || str.charAt(i) != c) {
+					return str.substring(0, i);
 				}
 			}
-			ans++;
 		}
-		return ans > 0 ? strs[0].substring(0, ans) : "";
+		return str0;
 	}
 
 
