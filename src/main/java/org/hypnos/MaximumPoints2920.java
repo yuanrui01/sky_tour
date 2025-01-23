@@ -18,7 +18,8 @@ public class MaximumPoints2920 {
             g[edge[1]].add(edge[0]);
         }
         boolean[] vis = new boolean[coins.length];
-        int[][] memo = new int[coins.length][31];
+        int depth = getDepth(coins);
+        int[][] memo = new int[coins.length][depth + 1];
         for (int[] meme : memo) {
             Arrays.fill(meme, Integer.MIN_VALUE);
         }
@@ -33,13 +34,26 @@ public class MaximumPoints2920 {
         for (Integer v : g[index]) {
             if (!vis[v]) {
                 s1 += f(v, k, factor, g, vis, coins, memo);
-                if (k > 0 && factor < 30)
+                if (k > 0 && factor < memo[0].length - 1)
                     s2 += f(v, k, factor + 1, g, vis, coins, memo);
             }
         }
         int actV = (coins[index] / (1 << (factor - 1)));
         vis[index] = false;
         return memo[index][factor] = Math.max(actV - k + s1, actV / 2 + s2);
+    }
+
+    private int getDepth(int[] coins) {
+        int max = 0;
+        for (int coin : coins) {
+            max = Math.max(coin, max);
+        }
+        int count = 0;
+        do {
+            count++;
+            max /= 2;
+        } while (max != 0);
+        return count;
     }
 
     public static void main(String[] args) {
