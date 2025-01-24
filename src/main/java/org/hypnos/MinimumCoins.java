@@ -33,6 +33,20 @@ public class MinimumCoins {
         return memo[i] = res + prices[i-1];
     }
 
+    /**
+     * 递推写法
+     */
+    public int minimumCoins2(int[] f) {
+        int n = f.length;
+        for (int i = (n + 1) / 2 - 1; i > 0; --i) {
+            int res = Integer.MAX_VALUE;
+            for (int j = i; j <= 2*i; ++j) {
+                res = Math.min(res, f[j]);
+            }
+            f[i-1] += res;
+        }
+        return f[0];
+    }
     public static void main(String[] args) {
         MinimumCoins minimumCoins = new MinimumCoins();
         int[] prices = {1,37,19,38,11,42,18,33,6,37,15,48,23,12,41,18,27,32};
