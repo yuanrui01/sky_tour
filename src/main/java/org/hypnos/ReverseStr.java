@@ -6,35 +6,22 @@ package org.hypnos;
  */
 public class ReverseStr {
 
-    public String reverseStr(String s, int k) {
-        StringBuilder sb = new StringBuilder();
-        int index = 0;
+    public String reverseStr(String S, int k) {
+        int n = S.length();
+        char[] s = S.toCharArray();
         int k2 = 2 * k;
-        int n = s.length();
-        while (index + k2 < n) {
-            int rk = k;
-            while (rk > 0) {
-                sb.append(s.charAt(index + rk - 1));
-                rk--;
-            }
-            while (rk < k) {
-                sb.append(s.charAt(index + k + rk));
-                rk++;
-            }
-            index += k2;
+        for (int i = 0; i < n; i += k2) {
+            reverse(s, i, Math.min(i + k, n) - 1);
         }
-        if (index < n) {
-            int rk = Math.min(k, n - index);
-            while (rk > 0) {
-                sb.append(s.charAt(index + rk - 1));
-                rk--;
-            }
-            index += Math.min(k, n - index);
+        return new String(s);
+    }
+
+    private void reverse(char[] s, int left, int right) {
+        while (left < right) {
+            char t = s[left];
+            s[left++] = s[right];
+            s[right--] = t;
         }
-        while (index < n) {
-            sb.append(s.charAt(index++));
-        }
-        return sb.toString();
     }
 
     public static void main(String[] args) {
