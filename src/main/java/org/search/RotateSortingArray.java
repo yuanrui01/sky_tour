@@ -20,13 +20,13 @@ public class RotateSortingArray {
                 return mid;
             }
             if (nm > last) {
-                if (target > last && nm >= target) {
+                if (target > last && nm > target) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
                 }
             } else {
-                if (target > last || nm >= target) {
+                if (target > last || nm > target) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
