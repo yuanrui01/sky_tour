@@ -6,20 +6,18 @@ package org.hypnos;
 public class SortArrayByParityII {
 
 	public int[] sortArrayByParityII(int[] nums) {
-		int n = nums.length;
-		int[] sn = new int[n];
-		int odd = 1;
 		int even = 0;
-		for (int num : nums) {
-			if ((num&1) == 1) {
-				sn[odd] = num;
-				odd+=2;
-			} else {
-				sn[even] = num;
-				even+=2;
+		int odd = 1;
+		while (even < nums.length) {
+			if ((nums[even]&1) == 1) {
+				while ((nums[odd]&1) == 1) {
+					odd+=2;
+				}
+				swap(nums, even, odd);
 			}
+			even+=2;
 		}
-		return sn;
+		return nums;
 	}
 
 	private void swap(int[] nums, int i, int j) {
