@@ -13,12 +13,8 @@ public class SubsetsWithDup {
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        if (nums.length == 0) {
-            ans.add(Collections.emptyList());
-        } else {
-            Arrays.sort(nums);
-            dfs(nums, 0, new ArrayList<>(), ans);
-        }
+        Arrays.sort(nums);
+        dfs(nums, 0, new ArrayList<>(), ans);
         return ans;
     }
 
