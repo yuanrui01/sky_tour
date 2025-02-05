@@ -12,11 +12,7 @@ public class Subsets {
 
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        if (nums.length == 0) {
-            ans.add(Collections.emptyList());
-        } else {
-            dfs(nums, 0, new ArrayList<>(), ans);
-        }
+        dfs(nums, 0, new ArrayList<>(), ans);
         return ans;
     }
 
