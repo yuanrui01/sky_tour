@@ -23,12 +23,12 @@ public class TripleInOne {
 
     public int pop(int stackNum) {
         if (isEmpty(stackNum)) return -1;
-        return stacks[stackNum * stackSize + --ix[stackNum]];
+        return stacks[stackNum*stackSize + --ix[stackNum]];
     }
 
     public int peek(int stackNum) {
         if (isEmpty(stackNum)) return -1;
-        return stacks[stackNum * stackSize + ix[stackNum] - 1];
+        return stacks[stackNum*stackSize+ix[stackNum]-1];
     }
 
     public boolean isEmpty(int stackNum) {

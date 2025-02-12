@@ -8,15 +8,25 @@ import org.common.ListNode;
 public class ReverseList {
 
 	public ListNode reverseList(ListNode head) {
-		ListNode pre = null;
-		ListNode cur = head;
-		while (cur != null) {
-			ListNode nxt = cur.next;
-			cur.next = pre;
-			pre = cur;
-			cur = nxt;
+		ListNode prev = null;
+		ListNode next = null;
+		while (head != null) {
+		    next = head.next;
+		    head.next = prev;
+		    prev = head;
+		    head = next;
 		}
-		return pre;
+		return prev;
+	}
+	
+	public ListNode reverseList2(ListNode head) {
+		return head == null ? null : reverse(null, head);
+	}
+	
+	public ListNode reverse(ListNode parent, ListNode child) {
+		ListNode next = child.next;
+		child.next = parent;
+		return next == null ? child : reverse(child, next);
 	}
 
 	public static void main(String[] args) {
