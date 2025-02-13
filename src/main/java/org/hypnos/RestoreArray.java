@@ -10,7 +10,6 @@ public class RestoreArray {
 
     public int[] restoreArray(int[][] adjacentPairs) {
         int n = adjacentPairs.length;
-        Set<Integer> vis = new HashSet<>();
         int[] ans = new int[n+1];
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int[] p : adjacentPairs) {
@@ -25,12 +24,12 @@ public class RestoreArray {
             }
         }
         ans[0] = start;
-        vis.add(start);
         for (int i = 0; i < n; ++i) {
-            for (Integer is : map.get(ans[i])) {
-                if (!vis.contains(is)) {
+            List<Integer> adj = map.get(ans[i]);
+            map.remove(ans[i]);
+            for (Integer is : adj) {
+                if (map.containsKey(is)) {
                     ans[i+1] = is;
-                    vis.add(is);
                     break;
                 }
             }
