@@ -16,10 +16,8 @@ public class MaxDistance624 {
             List<Integer> array = arrays.get(i);
             int first  = array.get(0);
             int last = array.get(array.size()-1);
-            ans = Math.max(ans, Math.abs(mn - first));
             ans = Math.max(ans, Math.abs(mn - last));
             ans = Math.max(ans, Math.abs(mx - first));
-            ans = Math.max(ans, Math.abs(mx - last));
             mn = Math.min(mn, first);
             mx = Math.max(mx, last);
         }
