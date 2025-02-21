@@ -33,11 +33,27 @@ public class MinimumWhiteTiles {
         return memo[i][j] = res;
     }
 
+    public int minimumWhiteTiles2(String floor, int numCarpets, int carpetLen) {
+        int m = floor.length();
+        int[][] dp = new int[numCarpets+1][m];
+        char[] f = floor.toCharArray();
+        dp[0][0] = f[0] - '0';
+        for (int i = 1; i < m; ++i) {
+            dp[0][i] = (f[i] - '0') + dp[0][i-1];
+        }
+        for (int i = 1; i <= numCarpets; ++i) {
+            for (int j = i * carpetLen; j < m; ++j) {
+                dp[i][j] = Math.min(dp[i-1][j-carpetLen], dp[i][j-1] + (f[j]-'0'));
+            }
+        }
+        return dp[numCarpets][m-1];
+    }
+
     public static void main(String[] args) {
         String floor = "1110111";
         int numCarpets = 2;
         int carpetLen = 1;
         MinimumWhiteTiles minimumWhiteTiles = new MinimumWhiteTiles();
-        System.out.println(minimumWhiteTiles.minimumWhiteTiles(floor, numCarpets, carpetLen));
+        System.out.println(minimumWhiteTiles.minimumWhiteTiles2(floor, numCarpets, carpetLen));
     }
 }
