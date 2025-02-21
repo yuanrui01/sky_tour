@@ -10,25 +10,34 @@ public class MinimumWhiteTiles {
 
     public int minimumWhiteTiles(String floor, int numCarpets, int carpetLen) {
         int m = floor.length();
-        int[][] memo = new int[numCarpets + 1][m];
+        int[][] memo = new int[m][numCarpets+1];
         for (int[] row : memo) {
             Arrays.fill(row, -1);
         }
-        return dfs(numCarpets, m - 1, floor.toCharArray(), memo, carpetLen);
+        return dfs(m - 1, numCarpets, floor.toCharArray(), memo, carpetLen);
     }
 
     private int dfs(int i, int j, char[] floor, int[][] memo, int carpetLen) {
-        if (j < carpetLen * i) {
+        if (i < carpetLen * j) {
             return 0;
         }
         if (memo[i][j] != -1) {
             return memo[i][j];
         }
-        int res = dfs(i, j - 1, floor, memo, carpetLen) + (floor[j] - '0');
-        if (i > 0) {
-            res = Math.min(res, dfs(i - 1, j - carpetLen, floor, memo, carpetLen));
+        // 不覆盖
+        int res = dfs(i-1, j, floor, memo, carpetLen) + (floor[i] - '0');
+        if (j > 0 && floor[i] == '1') {
+            // 覆盖
+            res = Math.min(res, dfs(i - carpetLen, j - 1, floor, memo, carpetLen));
         }
         return memo[i][j] = res;
     }
 
+    public static void main(String[] args) {
+        String floor = "1110111";
+        int numCarpets = 2;
+        int carpetLen = 1;
+        MinimumWhiteTiles minimumWhiteTiles = new MinimumWhiteTiles();
+        System.out.println(minimumWhiteTiles.minimumWhiteTiles(floor, numCarpets, carpetLen));
+    }
 }
