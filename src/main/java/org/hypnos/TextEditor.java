@@ -6,36 +6,44 @@ package org.hypnos;
  */
 public class TextEditor {
 
-    StringBuilder sb;
-    Integer cursor;
+    StringBuilder left;
+    StringBuilder right;
 
     public TextEditor() {
-        sb = new StringBuilder();
-        cursor = 0;
+        left = new StringBuilder();
+        right = new StringBuilder();
     }
 
     public void addText(String text) {
-        sb.insert(cursor, text);
-        cursor += text.length();
+        left.append(text);
     }
 
     public int deleteText(int k) {
-        int cnt = Math.min(cursor, k);
-        sb.delete(cursor-cnt, cursor);
-        cursor -= cnt;
-        return cnt;
+        k = Math.min(left.length(), k);
+        left.delete(left.length()-k, left.length());
+        return k;
     }
 
     public String cursorLeft(int k) {
-        cursor -= Math.min(cursor, k);
-        int start = Math.max(0, cursor-10);
-        return sb.substring(start, cursor);
+        while (k > 0 && !left.isEmpty()) {
+            right.append(left.charAt(left.length()-1));
+            left.setLength(left.length()-1);
+            k--;
+        }
+        return text();
     }
 
     public String cursorRight(int k) {
-        cursor = Math.min(cursor+k, sb.length());
-        int start = Math.max(0, cursor-10);
-        return sb.substring(start, cursor);
+        while (k > 0 && !right.isEmpty()) {
+            left.append(right.charAt(right.length()-1));
+            right.setLength(right.length()-1);
+            k--;
+        }
+        return text();
+    }
+
+    private String text() {
+        return left.substring(Math.max(0, left.length()-10));
     }
 
     public static void main(String[] args) {
