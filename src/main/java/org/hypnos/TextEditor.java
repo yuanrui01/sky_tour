@@ -21,8 +21,8 @@ public class TextEditor {
 
     public int deleteText(int k) {
         int cnt = Math.min(cursor, k);
-        sb.delete(Math.max(0, cursor-k), cursor);
-        cursor -= Math.min(cursor, k);
+        sb.delete(cursor-cnt, cursor);
+        cursor -= cnt;
         return cnt;
     }
 
