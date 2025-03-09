@@ -22,15 +22,16 @@ public class MaximumBeauty2 {
 				}
 			}
 		}
+		int[][] arr = list.toArray(new int[0][]);
 		int[] ans = new int[queries.length];
 		for (int i = 0; i < queries.length; ++i) {
 			int query = queries[i];
 			// 找到最后一个小于等于query的元素
 			int left = 0;
-			int right = list.size()-1;
+			int right = arr.length-1;
 			while (left <= right) {
 				int mid = (left + right) / 2;
-				int midV = list.get(mid)[0];
+				int midV = arr[mid][0];
 				if (query < midV) {
 					right = mid - 1;
 				} else {
@@ -40,7 +41,7 @@ public class MaximumBeauty2 {
 			if (right == -1) {
 				ans[i] = 0;
 			} else {
-				ans[i] = list.get(right)[1];
+				ans[i] = arr[right][1];
 			}
 		}
 		return ans;
