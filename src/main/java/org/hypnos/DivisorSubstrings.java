@@ -7,16 +7,22 @@ package org.hypnos;
 public class DivisorSubstrings {
 
     public int divisorSubstrings(int num, int k) {
-        String numStr = String.valueOf(num);
+        String str = String.valueOf(num);
+        int n = str.length();
         int ans = 0;
-        for (int i = 0; i <= numStr.length() - k; i++) {
-            int subNum = Integer.parseInt(numStr.substring(i, k));
-            if (subNum == 0)
-                continue;
-            if (num % subNum == 0) {
-                ans++;
-            }
+        for (int i = 0; i <= n - k; ++i) {
+            int subNum = Integer.parseInt(str.substring(i, i+k));
+            if (subNum == 0) continue;
+            if ((num % subNum) == 0) ans++;
         }
         return ans;
+    }
+
+    public static void main(String[] args) {
+        int num = 240;
+        int k = 2;
+        DivisorSubstrings divisorSubstrings = new DivisorSubstrings();
+
+        System.out.println(divisorSubstrings.divisorSubstrings(num, k));
     }
 }
