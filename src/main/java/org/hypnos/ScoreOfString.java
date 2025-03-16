@@ -3,7 +3,7 @@ package org.hypnos;
 /**
  * 3110. 字符串的分数
  */
-public class scoreOfString {
+public class ScoreOfString {
 
 	public int scoreOfString(String s) {
 		int ans = 0;
