@@ -12,7 +12,7 @@ public class TimeZoneTest {
 
     public static void main(String[] args) {
         Date date1 = new Date();
-        date1.toInstant()
+        date1.toInstant();
 
         //一个时间表示
         String stringDate = "2020-01-02 22:00:00";
