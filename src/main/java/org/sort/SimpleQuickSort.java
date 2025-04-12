@@ -15,13 +15,13 @@ public class SimpleQuickSort {
         while (i < j) {
             while (nums[i] < flag) i++;
             while (nums[j] > flag) j--;
-            if (i <= j) {
+            if (i < j) {
                 int tmp = nums[i];
                 nums[i] = nums[j];
                 nums[j] = tmp;
-                i++;
-                j--;
             }
+			i++;
+			j--;
         }
         qSort(nums, left, j);
         qSort(nums, i, right);
