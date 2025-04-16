@@ -22,4 +22,10 @@ public class LRUCacheByLinkedHashMap extends LinkedHashMap<Integer, Integer> {
     protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
         return size() > capacity;
     }
+
+
+	public static void main(String[] args) {
+		LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+		map.put("232", 2123);
+	}
 }
