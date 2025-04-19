@@ -1,8 +1,6 @@
 package org.hypnos;
 
-/**
- * @author: yuanrui
- */
+
  class ParentClass {
 	public void f() {
 		System.out.println("I am ParentClass's f().");
