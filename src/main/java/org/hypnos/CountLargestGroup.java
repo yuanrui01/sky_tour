@@ -11,6 +11,7 @@ public class CountLargestGroup {
 	public int countLargestGroup(int n) {
 		Map<Integer, Integer> bitSum = new HashMap<>();
 		int max = 0;
+		int ans = 0;
 		for (int i = 1; i <= n; ++i) {
 			int s = 0;
 			int t = i;
@@ -18,13 +19,15 @@ public class CountLargestGroup {
 				s += t % 10;
 				t /= 10;
 			}
-			max = Math.max(bitSum.merge(s, 1, Integer::sum), max);
+			int na = bitSum.merge(s, 1, Integer::sum);
+			if (na > max) {
+				ans = 1;
+				max = na;
+			} else if (na == max) {
+				ans++;
+			}
 		}
-		int cnt = 0;
-		for (Integer v : bitSum.values()) {
-			if (v == max) cnt++;
-		}
-		return cnt;
+		return ans;
 	}
 
 
