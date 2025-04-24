@@ -21,13 +21,14 @@ public class CountCompleteSubarrays {
 
 		int left = 0;
 		int right = 0;
-		Map<Integer, Integer> cnt = new HashMap<>();
+		Map<Integer, Integer> cnt = new HashMap<>(diffCount);
 
 		while (right < n) {
 			cnt.merge(nums[right], 1, Integer::sum);
 			if (cnt.size() == diffCount) {
+				int inc = n - right;
 				while (left <= right && cnt.size() == diffCount) {
-					ans += (n - right);
+					ans += inc;
 					Integer curCnt = cnt.get(nums[left]);
 					if (curCnt == 1) {
 						cnt.remove(nums[left]);
