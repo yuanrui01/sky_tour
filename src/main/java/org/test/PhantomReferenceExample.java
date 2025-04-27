@@ -52,7 +52,7 @@ public class PhantomReferenceExample {
 			// 在实际中，可能需要额外的映射机制来关联PhantomReference和Resource
 			// 为了简化，这里直接调用cleanup（假设我们知道是哪个资源）
 			// 实际场景中可能需要用WeakHashMap或其他方式保存Resource的引用
-			ref.get().cleanup(); // 注意：这里仅为演示，实际不可直接这样用
+
 		} else {
 			System.out.println("Resource not yet collected or GC not triggered.");
 		}
