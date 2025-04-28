@@ -4,7 +4,7 @@ package org.hypnos;
 /**
  * 2302. 统计得分小于 K 的子数组数目
  */
-public class CountSubarrays {
+public class CountSubarrays2302 {
 
     public long countSubarrays(int[] nums, long k) {
         long count = 0L;
@@ -27,7 +27,7 @@ public class CountSubarrays {
     public static void main(String[] args) {
         int[] nums = {2,1,4,3,5};
         int k = 10;
-        CountSubarrays countSubarrays = new CountSubarrays();
-        System.out.println(countSubarrays.countSubarrays(nums, k));
+        CountSubarrays2302 countSubarrays2302 = new CountSubarrays2302();
+        System.out.println(countSubarrays2302.countSubarrays(nums, k));
     }
 }
