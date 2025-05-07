@@ -23,16 +23,19 @@ public class MinTimeToReach {
 
 		while (!pq.isEmpty()) {
 			int[] curr = pq.poll();
-			int i = curr[0], j = curr[1], time = curr[2];
+			int i = curr[0], j = curr[1], t = curr[2];
+
+			// 再判断
+			if (t > visited[i][j]) continue;
 
 			// 到达终点
-			if (i == n - 1 && j == m - 1) return time;
+			if (i == n - 1 && j == m - 1) return t;
 
 			for (int[] dir : DIRS) {
 				int ni = i + dir[0], nj = j + dir[1];
 
 				if (ni >= 0 && ni < n && nj >= 0 && nj < m) {
-					int newTime = Math.max(time, mt[ni][nj]) + 1;
+					int newTime = Math.max(t, mt[ni][nj]) + 1;
 
 					if (newTime < visited[ni][nj]) {
 						visited[ni][nj] = newTime;
