@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 3373. 连接两棵树后最大目标节点数目 II
  */
-public class MaxTargetNodes {
+public class MaxTargetNodes2 {
 
     public int[] maxTargetNodes(int[][] edges1, int[][] edges2) {
         List<Integer>[] g2 = buildTree(edges2);
