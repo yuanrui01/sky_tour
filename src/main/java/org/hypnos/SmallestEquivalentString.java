@@ -1,9 +1,5 @@
 package org.hypnos;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeSet;
-
 /**
  * 1061. 按字典序排列最小的等效字符串
  */
