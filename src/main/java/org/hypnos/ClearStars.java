@@ -10,14 +10,14 @@ public class ClearStars {
 
     public String clearStars(String S) {
         char[] s = S.toCharArray();
-        LinkedList<Integer>[] stacks = new LinkedList[26];
-        Arrays.setAll(stacks, k -> new LinkedList<>());
+        ArrayDeque<Integer>[] stacks = new ArrayDeque[26];
+        Arrays.setAll(stacks, k -> new ArrayDeque<>());
         for (int i = 0; i < s.length; ++i) {
             if (s[i] != '*') {
                 stacks[s[i] - 'a'].add(i);
                 continue;
             }
-            for (LinkedList<Integer> stack : stacks) {
+            for (ArrayDeque<Integer> stack : stacks) {
                 if (!stack.isEmpty()) {
                     stack.removeLast();
                     break;
@@ -25,7 +25,7 @@ public class ClearStars {
             }
         }
         List<Integer> idxs = new ArrayList<>();
-        for (LinkedList<Integer> stack : stacks) {
+        for (ArrayDeque<Integer> stack : stacks) {
             idxs.addAll(stack);
         }
         Collections.sort(idxs);
