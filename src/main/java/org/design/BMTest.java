@@ -10,12 +10,13 @@ public class BMTest {
 
     private static final int SIZE = 256;
 
-
+	/**
+	 * 记录字符出现的最后位置
+	 */
     private void generateBC(char[] b, int m, int [] bc) {
         Arrays.fill(bc, -1);
         for (int i = 0; i < m; ++i) {
-            int ascii = b[i];
-            bc[ascii] = i;
+            bc[b[i]] = i;
         }
     }
 
@@ -39,11 +40,15 @@ public class BMTest {
 			if (j < m - 1) {
 				y = moveByGS(j, m, suffix, prefix);
 			}
+			// 每次移动好后缀和坏字符两种规则给出步数的最大值
             i = i + Math.max(x, y);
         }
         return -1;
     }
 
+	/**
+	 * 生成好后缀的对应表
+	 */
 	private void generateGS(char[] b, int m, int[] suffix, boolean[] prefix) {
 		for (int i = 0; i < m; ++i) {
 			suffix[i] = -1;
@@ -61,6 +66,9 @@ public class BMTest {
 		}
 	}
 
+	/**
+	 * 好后缀移动步数
+	 */
 	private int moveByGS(int j, int m, int[] suffix, boolean[] prefix) {
 		int k = m - 1 - j;
 		if (suffix[k] != -1) return j - suffix[k] + 1;
